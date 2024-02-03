@@ -1,0 +1,21 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+google_gmail_emails.head()
+sent_counts = google_gmail_emails['from_user'].value_counts()
+
+most_emails_sent_user = sent_counts.idxmax()
+num_emails_sent = sent_counts.max()
+
+# Create a DataFrame with counts and usernames
+counts_df = pd.DataFrame({'from_user': sent_counts.index, 'total_emails': sent_counts.values})
+
+# Rank users based on the number of emails sent and then alphabetically
+ranked_users = counts_df.sort_values(by=['total_emails', 'from_user'], ascending=[False, True]).reset_index(drop=True)
+ranked_users['rank'] = ranked_users.index + 1
+
+#print("Ranking of users based on the number of emails sent and alphabetical order:")
+#print(ranked_users)
+data = pd.DataFrame(ranked_users)
+data
